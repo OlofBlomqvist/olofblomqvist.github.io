@@ -21,7 +21,6 @@ footer,
   right:0;
   left:0;
   top:0;
-  height:50;
   background:rgba(247, 247, 247, 0.685);
   &-container {
     margin: 1rem auto;
@@ -79,7 +78,7 @@ footer,
   }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 680px) {
   .nav {
     &-container {
       text-align: left;
