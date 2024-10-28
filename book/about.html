@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html lang="en" class="dark" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction - Olof Blomqvist</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&amp;display=swap" rel="stylesheet">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "ayu" : "dark";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('dark')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            
+            <div class="sidebar-scrollbox">
+                <div style="text-align:center" class="left-side-bar-title">
+                 <a href="/about.html" style="font-size:x-large;text-decoration:none">
+                 <img src="/olof.jpg" style="border-radius:50%;width:100px;height:100px;">
+                <h1 style="margin:0px;font-size: 2em;">010F_</h1> 
+               </a>
+                <ol class="chapter"><li class="chapter-item affix "><a href="about.html" class="active">Introduction</a></li><li class="chapter-item affix "><li class="part-title">Projects 🧪</li><li class="chapter-item "><a href="projects/odd-box.html">Odd-Box - reverse proxy</a></li><li class="chapter-item "><a href="projects/gelf-lb.html">Gelf Load-balancer</a></li><li class="chapter-item "><a href="projects/cardano.html">Cardano</a></li><li class="chapter-item affix "><li class="spacer"></li><li class="chapter-item affix "><li class="part-title">The feed</li><li class="chapter-item "><a href="2024/October/refresh.html">2024-10-26 - Refresh</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="nonhttp://localhost:44419e"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Olof Blomqvist</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://github.com/OlofBlomqvist/olofblomqvist.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://twitter.com/010F_" title="010f_" target="_blank" aria-label="010f_">
+                            <i id="tw" class="fa fa-twitter" style="color:rgb(69, 136, 194)"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/olof-blomqvist-38136085" target="_blank" title="010f_" aria-label="010f_">
+                            <i id="li" class="fa fa-linkedin" style="color:rgb(128, 150, 54)"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search for anything.." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>I’m a software engineer located in Gothenburg, Sweden.</p>
+<p>This site is used for hosting various articles about topics that interest me, and documenting various personal projects.</p>
+<p>You can contact me by email at <a href="mailto:olof@twnet.se">olof@twnet.se</a> ✉️</p>
+<h2 id="for-recruiters"><a class="header" href="#for-recruiters">For recruiters</a></h2>
+<p>Thanks for coming by! I get messages from recruiters every day and do not have time to respond to everyone; sorry if I haven’t gotten back to you!</p>
+<blockquote>
+<p>I am <strong>NOT</strong> actively looking to change jobs at this time.</p>
+</blockquote>
+<h1 id="technical-history"><a class="header" href="#technical-history">Technical History</a></h1>
+<h2 id="early-days"><a class="header" href="#early-days">Early days</a></h2>
+<p>I started playing around with QBasic somewhere around 1995 and later explored Pascal, Perl, Bash &amp; Python. At some point around 2000 I tried to learn C and hit a brick wall. It would be several years before I got back to learning system-level programming for real.</p>
+<p>My time playing around with coding did however push me towards using Linux for everything non-gaming related ever since; starting with Storm Linux (1999).</p>
+<h2 id="studies"><a class="header" href="#studies">Studies</a></h2>
+<p>I studied electronics, microprocessors, operating systems &amp; network infrastructure for four years of upper secondary school (sixth form / high school). After that I went on to study network security for two years (Higher Vocational Education) learning about different network protocols and how to understand and effectively analyze network traffic using tools such as Wireshark.</p>
+<h2 id="professional-career"><a class="header" href="#professional-career">Professional career</a></h2>
+<p><strong>tl;dr</strong> - I started working in tech-support (1st through 3rd line) leading up to working as a “technical infrastructure specialist” for a couple of years before finally ending up working full-time as a software engineer.</p>
+<h3 id="technical-support--system-administration"><a class="header" href="#technical-support--system-administration">Technical Support &amp; System Administration</a></h3>
+<p>During the first couple of years working professionally in tech, around 2009 to 2017, I was primarily tasked with technical support and infrastructure management (i.e. sys admin type of work). As a lazy person, it did not take long before starting to automate things and I became fairly good at using Powershell. It was also around that time that I started realizing that knowing C# would be very useful to me in many cases and started to spend a lot of time learning it and started using it professionally at work.</p>
+<p>Having previously studied IT Security I was also able to take on tasks doing post incident reporting with respect to malware and intrusions, as well as network capture analysis, further improving my understanding of how networking actually works on (very) large networks.</p>
+<p>I worked for some time in different roles and ended up learning lot’s of things such as:</p>
+<ul>
+<li>Writing technical documentation.</li>
+<li>SCCM Management: app deployments and os patching.</li>
+<li>AD: Creating &amp; Maintaining GPO’s.</li>
+<li>Post-incident root cause analysis.</li>
+<li>Troubleshooting &amp; Root cause analysis:
+<ul>
+<li>Active Directory GPO issues.</li>
+<li>Network connectivity and performance issues (often firewall or proxy-server issues).</li>
+<li>Figuring out why a subset of client’s were misbehaving in some way or another.</li>
+<li>Analysing memory dumps of Windows clients.</li>
+<li>Analysing huge pcap/network capture files using Wireshark.</li>
+</ul>
+</li>
+</ul>
+<p>… I won’t list all the different types of work I’ve done, but the time spent on this side of tech helped me gain both wide and deep knowledge of technical infrastructure and computers in general, which turned out to be extremely useful for me once I went over to become a full-time software engineer. This broad technical background has made it easier to design solutions and troubleshoot complex issues.</p>
+<h3 id="software-engineering-part-1"><a class="header" href="#software-engineering-part-1">Software engineering (part 1)</a></h3>
+<p>In late 2017, After working in tech for some 7-8 years and gaining confidence in my self-taught programming skills, I started working as a developer at a company providing a product for automating business workflows - built in C# &amp; using PowerShell scripts for many automation tasks. Pretty much a perfect match for me since those were languages I was feeling very comfortable with already.</p>
+<p>Many of the automation tasks included communicating with different external systems but also a large amount of programmatically managing Active Directory, SCCM,Microsoft Exchange, or directly controlling Windows machines through WMI or PowerShell remoting.  All of which I had already had experience working with.</p>
+<p>As was the case with most .NET based shops at the time, the tech stack consisted of WCF services and MSSQL databases but also included Windows Workflow Foundation and Service Bus.</p>
+<p>While working here I had also been using F# for a bunch of different side-projects and was really getting in to the more functional style of programming. My go to scripting language had also quickly changed from python and powershell to F#.</p>
+<p>I ended up implementing support in the product for using C# libraries rather than PS scripts as a way to power workflows in the application using reflection, which was not something I had seen as very useful before.</p>
+<h3 id="software-engineering-part-2"><a class="header" href="#software-engineering-part-2">Software engineering (part 2)</a></h3>
+<p>Fast forwarding to 2019 having worked for some short years with system automation, I started working for a company in the hotel and travel industry. Like at my previous job I started as a full-stack developer, but after some time started focusing more and more on the backend side, as frontend development is not really that interesting to me.</p>
+<p><em>Like with my previous work in automation, message queues were used here to make for a reliable system - but unlike the mess that is Microsoft Windows Workflow Foundation and the related self-hosted service bus systems… The combination of Redis &amp; RabbitMQ used for this product was like a dream to work with!</em></p>
+<p>The systems here (when I started that is) were based on .NET 4.8, Redis, RabbitMQ, MSSQL &amp; WCF services. We started migrating slowly away from .NET 4.8 and since then switched between dotnet core 3 thru 8. The two largest internal services were moved from WCF to CoreWCF.</p>
+<p>Having worked successfully with gRPC on a side-project previously I ended up pushing for using that instead of (Core)WCF for new internal projects, something that has been working out well so far.</p>
+<h3 id="devops-prs-ci-kubernetes--containerization"><a class="header" href="#devops-prs-ci-kubernetes--containerization">DevOps: PRs, CI, Kubernetes &amp; Containerization</a></h3>
+<p>Being a bit annoyed with the somewhat slow, fragile and dated way we were deploying our services, I decided to make sure all of our projects were possible to compile and run in a containerized way, and set up Azure CI pipelines to compile and push images to a private image registry in the cloud. This worked well for setting up a small POC running the entire system using docker-compose as well as in my private kubernetes cluster.</p>
+<p>The company already had a kubernetes cluster running on-prem for testing, using ArgoCD for easy deploys. As I already had modified the projects to work well with environment-variable based configurations, all I had to do was write argo application manifests and Helm charts for getting everything deployed; luckily I already knew how to do that!</p>
+<p>As a way to push this way of working forward, I used a PR generator in ArgoCD and set things up such that it was possible to label a PR with ‘preview’ and ArgoCD would pick the images up from our internal registry and run the entire system, while also having CI set up to add comments on the PR with instructions on how to reach the services and access control it thru ArgoCD’s web-ui.</p>
+<p>I don’t usually enjoy the ops-side of DevOps very much, but working with Kubernetes this way to provide ephemeral environments on the fly felt very rewarding and I might look in to working more with Kubernetes and especially ArgoCD in the future.</p>
+<h2 id="ctfs-puzzles--reverse-engineering"><a class="header" href="#ctfs-puzzles--reverse-engineering">CTF’s, Puzzles &amp; Reverse engineering</a></h2>
+<p>Outside of software engineering, one of my main interests is puzzle solving—whether through Capture the Flag (CTF) challenges or tackling tricky problems in general.</p>
+<p>Over the years, playing a few MMOs led me to experiment with DLL (or shared library) injection and network traffic decoding, building custom HUDs and maps for various games. This hands-on experience became one of the most enjoyable ways I learned reverse engineering. When Ghidra was released around 2019, I was excited to dive into it, and it’s since become one of my favorite tools in this field.</p>
+<p>Though I don’t participate in timed CTFs—since I’m not a fan of the time pressure—the puzzles I’ve enjoyed most were (surprisingly) created by the Swedish National Defence Radio Establishment (FRA). Occasionally, they require applicants to solve these as part of the application process for SIGINT roles. While I’m not interested in applying myself, it’s been rewarding to tackle these just for the challenge. The difficulty range from very easy (30m) to fairly complicated (8h) in my experience so they are are fun way to stay sharp.</p>
+<h3 id="advent-of-code"><a class="header" href="#advent-of-code">Advent of Code</a></h3>
+<p>One event I look forward to each year is Advent of Code, a December-long series of programming puzzles that offers both challenge and a fun way to experiment with new languages. It’s been a fantastic opportunity to stretch my skills and test-drive languages I don’t typically work with, all while solving clever puzzles. I have a lot of respect for the work put into creating these challenges—it’s clear they’re designed with care and creativity!</p>
+<p>Looking ahead, I do wonder how AI will change the landscape, especially with the growing accessibility of tools like OpenAI. While it’s great to have new tech on our side, I hope that the spirit of problem-solving stays alive and well, without AI shortcuts taking away the fun.</p>
+<h2 id="open-source"><a class="header" href="#open-source">Open Source</a></h2>
+<p>While I did not start working with code full-time until around 2017, I had been coding both on side-projects and contributed to different open-source projects as far back as 2009.</p>
+<p>In 2019 I started looking in to learning Rust. A language that had many features I’d previously enjoyed in languages like F# and OCaml whilst also getting rid of the need for garbage collection and runtimes.</p>
+<p>Realizing that Rust was far more interesting and fun to work with than anything I’ve used before it, I spent huge amounts of time learning it and even started working on some developer tooling for myself which I ended up open-sourcing: <a href="./projects/odd-box.html">odd-box</a>.</p>
+<p>Having started the project as a learning exercise it is not particularly well-written, especially in older parts of the code, but it works <strong>very</strong> well for what I need it to do, and is a fun project to work on.</p>
+<p>Below are a few of the projects I’ve published on GitHub, most of which you can read more about in the projects section on this page as well.</p>
+<ul>
+<li>
+<p><a href="./projects/odd-box.html">odd-box</a> : A reverse proxy and basic web server. Initially started as a learning exercise, it might not be the cleanest code, especially in the older sections, but it performs exceptionally well for my needs and has been a rewarding project to develop.</p>
+</li>
+<li>
+<p><a href="./projects/gelf-lb.html">GELF Load Balancer</a>: An application-layer load balancer for GELF over UDP, allowing efficient log aggregation for high-traffic environments.</p>
+</li>
+<li>
+<p><a href="./projects/cardano.html">Language Server Protocol (LSP)</a>: A custom implementation of LSP, including a WASM-compatible client, aimed at improving the developer experience for custom DSLs.</p>
+</li>
+<li>
+<p><a href="./projects/cardano.html">DSL Parser + CBOR Encoder/Decoder</a>: A versatile parser with a CBOR encoding/decoding layer for efficient data interchange in constrained environments.</p>
+</li>
+<li>
+<p><a href="(./projects/cardano.html">Cardano Blockchain Tools</a>: Includes a blockchain indexer for smart contracts on the Cardano blockchain, grapql services for querying and realtime events, and a suite of macros to streamline data handling, with some contributions to Cardano documentation.</p>
+</li>
+</ul>
+<h2 id="blockchain"><a class="header" href="#blockchain">Blockchain</a></h2>
+<p>As a way to broaden my knowledge about blockchain, smart-contracts and decentralized systems in general, I decided to dive in to the Cardano blockchain. It is a really interesting project and I contribute as best I can here. Cardano is built around Haskell, something I think is their biggest mistake, but it did at least help me learn Haskell fairly well, even tho I would not choose to build anything with it myself.</p>
+<p>Anyway.. through Cardano I got to work a lot with Nix, eventually leading me to NixOS; which was a real gamechanger for me as I was used to vanilla Linux dists (Arch btw) where things had a tendency to easily break when not careful.</p>
+<p>A combination of Nix, Rust &amp; Devbox (by jetify) became my go-to tools for just about everything after having worked within the Cardano ecosystem.</p>
+<p>I should mention here that Cardano was not the only blockchain system I explored, but also Bitcoin, Ethereum &amp; Solana.. all of which had better developer experiences but felt like toys in comparison.</p>
+<h2 id="front-end-development"><a class="header" href="#front-end-development">Front-end development</a></h2>
+<p>I’ve used a long list of technologies for building websites over the years: php, vanilla js ASP.NET MVC (c#/html/js), jquery (js), angular (js), react (typescript), yew (rust), elm, fable+elmish (f#).. and probably some more that I do not remember. The easiest work work with was ELM and elmish: easily the simplest to use frameworks and fastest tooling I have ever used in the front-end world. Unfortunately React is more popular in the industry and thus the technology I’ve worked with the most professionally.</p>
+<h2 id="programming--scripting-languages"><a class="header" href="#programming--scripting-languages">Programming &amp; Scripting Languages</a></h2>
+<p>Learning new basics of a new language is not really that hard when you already know how to program in another. Even so, there is a <strong>huge</strong> difference in understanding how a language (and possibly its runtime) works under the hood and just knowing it’s syntax.</p>
+<blockquote>
+<p>Most dotnet developers for example do not know how the async/await keywords de-sugar or how the task worker implementations actually work, leading to making simple mistakes causing deadlocks and other performance issues. At least the synchronization context issues are (mostly) no more - so that makes it all-right to not know what a continuation is or how basic things like async state machines actually work, right? 😡</p>
+</blockquote>
+<p>While I now am fairly fluent in more than a few languages - these are the ones I am the most experienced with:</p>
+<ul>
+<li>F#</li>
+<li>C#</li>
+<li>Rust</li>
+<li>TypeScript</li>
+<li>PowerShell</li>
+</ul>
+<p>Another language that I actually enjoy both reading and writing, but haven’t had the opportunity to use that much, is Python.</p>
+<p>My favorite language to work today with is <strong>Rust</strong>.</p>
+<br/>
+<hr/>
+<br/>
+<br/>
+<center>
+olof@twnet.se - 2024
+</center>
+                    </main>
+                    
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
