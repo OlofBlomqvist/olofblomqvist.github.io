@@ -1,6 +1,6 @@
 # ODD-BOX
 
-The first Rust based project I made open source: a reverse proxy server also doubling as a basic webserver. 
+One of the first Rust based project I made open source: a reverse proxy server also doubling as a basic webserver. 
 
 I had the idea for this project when having to keep multiple processes running, each with custom hostnames, on my local dev-machine (cardano node, indexer, marlowe-gql etc.) and could not find a way to orchestrate this without tools such as docker-compose, which was not a viable option at the time since I needed to be able to easily attach to the processes for debugging.
 
